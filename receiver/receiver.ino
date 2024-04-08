@@ -54,7 +54,7 @@ long getRand(){
   if (variance(buffer) < 144{
     //do something to the array? here
   }
-  //we don't do anything if data is sufficiently random
+  //we don't do anything if data is sufficiently spread
   seed = buffer[index];
   randomSeed(seed);
   return random();
@@ -86,29 +86,18 @@ void loop() {
 
     Serial.print("packet num: ");
     Serial.println(RX_buffer[0]);
-    Serial.print("x: ");
-<<<<<<< HEAD
-    Serial.println(RX_buffer[1]);
-    Xbuffer[counter] = RX_buffer[1];
-    Serial.print("y: ");
-    Serial.println(RX_buffer[2]);
-    Ybuffer[counter] = RX_buffer[2];
-    Serial.print("z: ");
-    Serial.println(RX_buffer[3]); 
-    Zbuffer[counter] = RX_buffer[3];
-
-    counter = (counter+1)%100;
-    
-    delay(10);
-=======
+   
     Serial.println(xVal);
+    Xbuffer[counter] = xVal;
     Serial.print("y: ");
     Serial.println(yVal);
+    Ybuffer[counter] = yVal;
     Serial.print("z: ");
     Serial.println(zVal); 
+    Zbuffer[counter] = zVal;
+    counter = (counter+1)%100;
 
     delay(500);
->>>>>>> c203e1d4d479e0f69f45680a0cd795122e206d7f
     digitalWrite(RED_LED, LOW);
 
     Radio.RxOn();
