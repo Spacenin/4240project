@@ -35,20 +35,29 @@ void loop() {
       int yVal = analogRead(Y);
       int zVal = analogRead(Z);
       
-      TX_buffer[1] = map(xVal, 0, 4095, 0, 255);
-      TX_buffer[2] = map(yVal, 0, 4095, 0, 255);
-      TX_buffer[3] = map(zVal, 0, 4095, 0, 255);
+//      TX_buffer[1] = map(xVal, 0, 4095, 0, 255);
+//      TX_buffer[2] = map(yVal, 0, 4095, 0, 255);
+//      TX_buffer[3] = map(zVal, 0, 4095, 0, 255);
+      TX_buffer[1] = xVal & (0xFF);
+      TX_buffer[2] = xVal >> 8;
+      TX_buffer[3] = yVal & (0xFF);
+      TX_buffer[4] = yVal >> 8;
+      TX_buffer[5] = zVal & (0xFF);
+      TX_buffer[6] = zVal >> 8;
 
       Serial.print("packet num: ");
       Serial.println(TX_buffer[0]);
       Serial.print("x: ");
-      Serial.println(TX_buffer[1]);
+      Serial.println(xVal);
       Serial.print("y: ");
-      Serial.println(TX_buffer[2]);
+      Serial.println(yVal);
       Serial.print("z: ");
-      Serial.println(TX_buffer[3]); 
+      Serial.println(zVal); 
 
       Radio.SendData(TX_buffer, packetSize);
-      delay(50);
     }
+
+    ++packetNum;
+
+    delay(1000);
 }
