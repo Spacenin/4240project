@@ -80,9 +80,14 @@ void loop() {
     
     sizeRX = Radio.ReceiveData(RX_buffer);
 
+    int xVal = RX_buffer[1] | (RX_buffer[2] << 8);
+    int yVal = RX_buffer[3] | (RX_buffer[4] << 8);
+    int zVal = RX_buffer[5] | (RX_buffer[6] << 8);
+
     Serial.print("packet num: ");
     Serial.println(RX_buffer[0]);
     Serial.print("x: ");
+<<<<<<< HEAD
     Serial.println(RX_buffer[1]);
     Xbuffer[counter] = RX_buffer[1];
     Serial.print("y: ");
@@ -95,7 +100,18 @@ void loop() {
     counter = (counter+1)%100;
     
     delay(10);
+=======
+    Serial.println(xVal);
+    Serial.print("y: ");
+    Serial.println(yVal);
+    Serial.print("z: ");
+    Serial.println(zVal); 
+
+    delay(500);
+>>>>>>> c203e1d4d479e0f69f45680a0cd795122e206d7f
     digitalWrite(RED_LED, LOW);
+
+    Radio.RxOn();
   }
   Serial.println(getRand());
   
