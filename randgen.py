@@ -35,13 +35,17 @@ def main():
     parser.add_argument("-n", type=int)
     args = parser.parse_args()
 
-    if args.l is None or args.u is None or args.n is None:
+    if args.l is None:
         lower_bound = 0
-        upper_bound = 1000
-        num_rands = 1
     else:
         lower_bound = args.l
+    if args.u is None:
+        upper_bound = 1000
+    else:
         upper_bound = args.u
+    if args.n is None:
+        num_rands = 1
+    else:
         num_rands = args.n
 
     #read the files and save
