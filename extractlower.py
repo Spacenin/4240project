@@ -1,4 +1,4 @@
-
+import sys
 
 
 #gets lower bits from a number
@@ -44,3 +44,11 @@ def main(input_file):
             z_file.write(str(value) + '\n')
 
 
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("python extractlower.py <input_file>")
+        sys.exit(1)
+    
+    input_file = sys.argv[1]
+    main(input_file)
