@@ -1,10 +1,9 @@
 
 
 
-#helper function that basically takes a value and just gets the lower bits 
-#(a lil masky mask)
+#gets lower bits from a number
 def extract_lower_bits(value):
-    #i chose 8 bits completely arbitrarily bc slay
+    #8 bits is arbitrary
     return value & 0xFF
 
 def main(input_file):
@@ -12,12 +11,12 @@ def main(input_file):
     y_values = []
     z_values = []
 
-    #basically iterate through files
+    #iterate through file
     with open(input_file, 'r') as file:
         lines = file.readlines()
         for i in range(0, len(lines), 4):
 
-            #was getting an error and this fixed it :)
+
             if i + 3 >= len(lines):
                 break  
 
