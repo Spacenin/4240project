@@ -1,0 +1,47 @@
+
+
+
+#helper function that basically takes a value and just gets the lower bits 
+#(a lil masky mask)
+def extract_lower_bits(value):
+    #i chose 8 bits completely arbitrarily bc slay
+    return value & 0xFF
+
+def main(input_file):
+    x_values = []
+    y_values = []
+    z_values = []
+
+    #basically iterate through files
+    with open(input_file, 'r') as file:
+        lines = file.readlines()
+        for i in range(0, len(lines), 4):
+
+            #was getting an error and this fixed it :)
+            if i + 3 >= len(lines):
+                break  
+
+            # get the values
+            x = int(lines[i + 1].split(': ')[1])
+            y = int(lines[i + 2].split(': ')[1])
+            z = int(lines[i + 3].split(': ')[1])
+            
+            # get the low bits
+            x_values.append(extract_lower_bits(x))
+            y_values.append(extract_lower_bits(y))
+            z_values.append(extract_lower_bits(z))
+    
+    # stick em in output files
+    with open('x.txt', 'w') as x_file:
+        for value in x_values:
+            x_file.write(str(value) + '\n')
+
+    with open('y.txt', 'w') as y_file:
+        for value in y_values:
+            y_file.write(str(value) + '\n')
+
+    with open('z.txt', 'w') as z_file:
+        for value in z_values:
+            z_file.write(str(value) + '\n')
+
+
