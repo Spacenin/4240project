@@ -1,11 +1,14 @@
 
 
 import random
+import math
 
+file_len = 0
 #yoooo read the value from the file and save that shit
 def read_values(filename):
     with open(filename, 'r') as inputfile:
         values = [int(line.strip()) for line in inputfile]
+        file_len = len(inputfile.readlines)
     return values
 
 #get those numbers queen
@@ -13,13 +16,18 @@ def generate_random_numbers(x_values, y_values, z_values):
     while True:
         #basically loop through and grab the first value 
         #and save it to the corresponding var
-        for x, y, z in zip(x_values, y_values, z_values):
-            # i just did addition? idk i feel like we might should do something more complex
-            seed_value = x + y + z
-            random.seed(seed_value)
-            #should we take a range as input from the user?
-            random_number = random.randint(0, 1000)
-            yield random_number
+        x = x_values(random.randint(0, file_len))
+        y = y_values(random.randint(0, file_len))
+        z = z_values(random.randint(0, file_len))
+        #math.perm: gets big number, mod z makes it difficult to find original seed values
+        if x > y:
+            seed_value = math.perm(x,y) % z
+        else:
+            seed_value = math.perm(y,x) % z
+        random.seed(seed_value)
+        #should we take a range as input from the user?
+        random_number = random.randint(0, 1000)
+        yield random_number
 
 def main():
     #read the files and save as a array thingy (is it an array in python?)
