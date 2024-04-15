@@ -26,7 +26,11 @@ def generate_random_numbers(x_values, y_values, z_values, upper_bound, lower_bou
         random_number = random.randint(lower_bound, upper_bound)
         return random_number
         
-
+def calculate_variance(data):
+    n = len(data)
+    mean = sum(data) / n
+    variance = sum((x - mean) ** 2 for x in data) / n
+    return variance
 
 def main():
     parser = argparse.ArgumentParser()
@@ -62,6 +66,8 @@ def main():
         rands.append(random_number)
         x = x+1
 
+    variance = calculate_variance(rands)
+    print("Variance:", variance)
 
     return (rands)
 
